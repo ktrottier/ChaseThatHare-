@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title itemprop="name">Chase That Hare!</title>
+    <link rel="shortcut icon" href="images/raceOriginal.jpg" />
+    <link rel="stylesheet" href="CSS/normalize.css">
+    <link rel="stylesheet" href="CSS/Page2.css">
+  </head>
+
+  <body>
+    <h3>Welcome to the 100 mile race! Press GO to start!</h3>
+    <h4>Choose values between 0 - 10</h4>
+    <h3 itemprop="animal">Tortoise</h3>
+    <div class="textfield">
+      <form>
+        Name: <input type="text" id="turtle_name"/>
+        Speed: <input type="text" id="turtle_speed"/>
+        Focus: <input type="text" id="turtle_focus"/>
+      </form>
+    </div>
+    <h3>Hare</h3>
+    <div class="textfield">
+      <form>
+        Name: <input type="text" id="rabbit_name">
+        Speed: <input type="text" id="rabbit_speed">
+        Focus: <input type="text" id="rabbit_focus">
+      </form>
+    </div>
+    <br />
+      <input class="buttons" type="button" value="GO!" onclick="secondPart();"/>
+    <br />
+    <br />
+    <h2>Results!</h2>
+    <div data-alert class="alert-box" id="results">
+      <!-- Results -->
+    </div>
+    <br />
+    <div id="footer">
+      <form action="raceHTML.html"><input class="buttons" type=submit value="Go Back"><a
+      href="raceHTML.html" ></a></form>
+    </div>
+  </body>
+
+<script type="text/javascript">
+
+  function Animal(name, speed, focus){
+    this.speed = speed;
+    this.focus = focus;
+    this.position = 0;
+    this.name = name;
+  }
+  function run(animal){
+      if ((Math.random() * 10) < animal.focus){
+        animal.position = animal.position + animal.speed;
+      }
+    }
+
+//Assigning user input to variables.
+
+
+//Attempting to make function
+
+var secondPart = function(){
+  var turtleName = document.getElementById('turtle_name').value;
+  var rabbitName = document.getElementById('rabbit_name').value;
+  var turtleSpeed = parseInt(document.getElementById('turtle_speed').value);
+  var rabbitSpeed = parseInt(document.getElementById('rabbit_speed').value);
+  var turtleFocus = parseInt(document.getElementById('turtle_focus').value);
+  var rabbitFocus = parseInt(document.getElementById('rabbit_focus').value);
+
+  var raceResults = document.getElementById('results');
+
+  var tortoise = new Animal(turtleName, turtleSpeed, turtleFocus);
+  var hare = new Animal(rabbitName, rabbitSpeed, rabbitFocus);
+
+
+    while (tortoise.position < 100 && hare.position < 100){
+      run(tortoise);
+      run(hare);
+      raceResults.innerHTML = "At this point in the race, " + tortoise.name + " is at " + tortoise.position + ", and " + hare.name + " is at " + hare.position + ".\n";
+    }
+
+    if (tortoise.position >= 100 && hare.position < 100){
+      raceResults.innerHTML = raceResults.innerHTML + tortoise.name + " wins the race!  Congratulations!";
+    }
+    else if (hare.position >= 100 && tortoise.position < 100){
+      raceResults.innerHTML = raceResults.innerHTML + hare.name + " wins the race!  Congratulations!";
+    }
+    else if (hare.position >= 100 && tortoise.position >= 100){
+      raceResults.innerHTML = raceResults.innerHTML + "It's a tie!";
+    }
+};
+</script>
+
+
+</html>
